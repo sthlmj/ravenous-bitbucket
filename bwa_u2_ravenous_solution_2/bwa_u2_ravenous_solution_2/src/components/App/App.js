@@ -43,7 +43,9 @@ class App extends React.Component {
       <div className="App">
         <h1>ravenous</h1>
         <SearchBar />
-		//Remove repetition of components inside of the BusinessList component. <ComponentName propName={value} />
+		{/* //Setting a BusinessList Prop. 
+		To remove repetition of components inside of the <BusinessList /> component, add some more functionality to aid this goal. 
+		<ComponentName propName={value} /> */}
         <BusinessList businesses={businesses} />
       </div>
     );

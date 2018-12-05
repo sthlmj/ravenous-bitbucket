@@ -1,5 +1,4 @@
 /*
-Great! Now you're ready to begin creating your first React component. 
 The purpose of the <Business /> component is to represent how a business (a restaurant) 
 in Ravenous will be formatted and styled (results you get after a search). 
 For now, we'll hard code a single business listing. Later, you'll update it dynamically using the Yelp API.
@@ -33,7 +32,7 @@ class Business extends React.Component {
         <div className="image-container">
           <img src={business.imageSrc} alt=''/>
         </div>
-		//reference to properties in the business object
+		{/*reference to properties in the business object*/}
         <h2>{business.name}</h2>
         <div className="Business-information">
           <div className="Business-address">

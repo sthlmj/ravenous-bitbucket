@@ -18,7 +18,7 @@ class BusinessList extends React.Component {
 	  //return statement that returns following HTML
     return (
       <div className="BusinessList">
-	  //Business components below
+	  {/*Business components below to simulate a list of returned business*/}
         <Business />
         <Business />
         <Business />

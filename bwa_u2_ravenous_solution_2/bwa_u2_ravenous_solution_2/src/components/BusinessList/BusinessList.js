@@ -17,14 +17,15 @@ class BusinessList extends React.Component {
 	  
 	  Inside of the map() method, pass a callback function with one parameter called business.
 	  
-	  The callback function should return a <Business /> component. The returned <Business /> should have a property called business. 
+	  The callback (call-later) function should return a <Business /> component. The returned <Business /> should have a property called business. 
 	  Set the property equal to the parameter of the callback function. (Don't forget your curly braces and semicolon!)
 	  
 	  Review: Created a list of businesses using an array, rather than repeating components in BusinessList.js
 	  Built functionality for the BusinessList component to iterate through the array and return Business components.
+	  
 	  */
         {
-          this.props.businesses.map(business => {
+          this.props.businesses.map(business => { {/*functionality behind <BusinessList businesses={businesses} /> in App.js, it iterates through businesses array in App.js*/}
             return <Business business={business} />
           })
         }

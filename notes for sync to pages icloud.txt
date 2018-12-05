@@ -1,0 +1,198 @@
+ravenous project part 2 summary: 
+
+- moved business object from business.js to app.js
+- create a businesses array that holds six references to the business object in App.js
+- adds a businesses property to the <BusinessList /> component in render() method in App.js
+- purpose of businesses property in App.js is to iterate through businesses array in App.js
+- removed business components that simulate a list of returned business in BusinessList.js
+- build functionality for the BusinessList component (in BusinessList.js) to iterate through the array and return Business components (BusinessList.js must import Business).
+	- in BusinessList.js, inside BusinessList div, access the businesses prop and call the .map() method on it.
+		- .map() method will create a new array with the results of calling a function for every array element.
+		- .map() method calls the provided function once for each element in an array, in order.
+	- this.props.businesses.map() 
+		- accessing the business prop.
+		- .map() method creates a new array as business
+		- .map(business => { return <Business business={business} /> })
+		- .map() business callback (call-later) function, then returns <Business business={business} /> to build (put-together) business objects.
+- access Business information via the previously set business prop in BusinessList.js with this syntax: 
+	- this.props.business.name
+	- this.props.business.address
+	- this.props.business.city
+
+===============================================================================================================================================================================
+sets state: 
+this.state = { mood: 'decent' };
+
+
+read state: 
+{this.state.mood}
+
+
+update state: 
+origin state: 
+{
+	mood: 'great',
+	hungry: false
+}
+
+update state: 
+this.setState({ hungry: true });
+
+origin state updated to: 
+{
+	mood: 'great'
+	hungry: true
+}
+
+
+call this.setState from Another function:
+origin state: 
+this.state = { weather: 'sunny' };
+this.makeSomeFog = this.makeSomeFog.bind(this)
+
+makeSomeFog() {
+	this.setState({
+		weather: 'foggy'
+	});
+}
+
+origin updated state to:
+{
+	weather: 'foggy'
+}
+
+===============================================================================================================================================================================
+Build a Stateful Component Class, stateful component pass its state to a stateless component. 
+To make that happen, you need two component classes: a stateful class and a stateless class
+
+stateful parent class characteristics: 
+- constructor
+- sates
+- returns: return <Child name={this.state.name} />; in render method.
+- parent pass prop to child: <Child name={this.state.name} />;
+
+stateless child, receiving state from parent: 
+- child is going to receive a prop called name and display that prop on the screen
+- access prop by: this.prop.name-of-prop in render method tags.
+
+parent is going to pass prop to child.
+that means that a <Parent /> is going to render a <Child />.
+
+Example codes Parent.js:
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Child } from './Child'
+
+
+class Parent extends React.Component {
+  
+  constructor(props) {
+    super(props)
+    this.state = { name: 'Frarthur' }
+  }
+  
+  render() {
+    return <Child name={this.state.name} />;
+  }
+}
+
+ReactDOM.render(
+  <Parent />,
+  document.getElementById('app')
+);
+
+
+Example codes: Child.js:
+import React from 'react';
+
+export class Child extends React.Component {
+  render() {
+    return <h1>Hey, my name is {this.props.name}!</h1>;
+  }
+}
+
+===============================================================================================================================================================================
+Child components update their parents state
+1. parent component class defines a method that calls this.setState(). For an example, look in Step1.js at the .handleClick() method.
+2. parent component binds newly-defined method to the current instance of the component in its constructor. For an example, look in Step2.js at the end of the constructor() method.
+3. Once parent defined a method that updates its state and bound to it, the parent then passes that method down to a child. 
+	For an example, look in Step2.js at the prop: <ChildClass onClick={this.handleClick} />
+
+Example codes Step1.js:
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { ChildClass } from './ChildClass';
+
+class ParentClass extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { totalClicks: 0 };
+  }
+
+  handleClick() {
+    const total = this.state.totalClicks;
+
+    // calling handleClick will 
+    // result in a state change:
+    this.setState(
+      { totalClicks: total + 1 }
+    );
+  }
+}
+
+Example codes Step2.js: 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { ChildClass } from './ChildClass';
+
+class ParentClass extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { totalClicks: 0 };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const total = this.state.totalClicks;
+
+    // calling handleClick will 
+    // result in a state change:
+    this.setState(
+      { totalClicks: total + 1 }
+    );
+  }
+
+  // The stateful component class passes down
+  // handleClick to a stateless component class:
+  render() {
+    return (
+      <ChildClass onClick={this.handleClick} />
+    );
+  }
+}
+
+Example codes Step3.js: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
