@@ -112,11 +112,14 @@ export class Child extends React.Component {
 }
 
 ===============================================================================================================================================================================
-Child components update their parents state
+Child components update their parents state example
 1. parent component class defines a method that calls this.setState(). For an example, look in Step1.js at the .handleClick() method.
 2. parent component binds newly-defined method to the current instance of the component in its constructor. For an example, look in Step2.js at the end of the constructor() method.
 3. Once parent defined a method that updates its state and bound to it, the parent then passes that method down to a child. 
 	For an example, look in Step2.js at the prop: <ChildClass onClick={this.handleClick} />
+4. Child receives passed-down function, and uses it as an event handler. When a user clicks on the <button></button> a click event will fire. 
+This will make the passed-down function get called, which will update the parents state.
+
 
 Example codes Step1.js:
 import React from 'react';
@@ -175,10 +178,94 @@ class ParentClass extends React.Component {
 }
 
 Example codes Step3.js: 
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+export class ChildClass extends React.Component {
+  render() {
+    return (
+      // The stateless component class uses
+      // the passed-down handleClick function,
+      // accessed here as this.props.onClick,
+      // as an event handler:
+      <button onClick={this.props.onClick}>
+        Click Me!
+      </button>
+    );
+  }
+}
 
 
+To make a child component update its parents state, the first step is to define a state-changing method on the parent.
+Child.js
+import React from 'react';
 
+export class Child extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.handleChange = this.handleChange.bind(this);
+  }
 
+  handleChange(e) {
+    const name = e.target.value;
+    this.props.onChange(name);
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>
+          Hey my name is {this.props.name}!
+        </h1>
+        <select id="great-names" onChange={this.handleChange}>
+          <option value="Frarthur">
+            Frarthur
+          </option>
+
+          <option value="Gromulus">
+            Gromulus
+          </option>
+
+          <option value="Thinkpiece">
+            Thinkpiece
+          </option>
+        </select>
+      </div>
+    );
+  }
+}
+
+Parent renders a <Child /> passing in a name prop. This name prop is the same value that the <Child /> displays in its <h1></h1>
+Parent.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Child } from './Child';
+
+class Parent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { name: 'Frarthur' };
+    
+    this.changeName = this.changeName.bind(this);
+  }
+  
+  changeName(newName) {
+    this.setState({
+      name: newName
+    });
+  }
+
+  render() {
+    return <Child name={this.state.name} onChange={this.changeName} />
+  }
+}
+
+ReactDOM.render(
+	<Parent />,
+	document.getElementById('app')
+);
 
 
 
