@@ -13,6 +13,7 @@ class Business extends React.Component {
 		business object was removed(moved to App.js), statements like {business.imageSrc} will no longer work.
 		business info now has to be accessed via the business prop you set in BusinessList.js, modify all statements to {this.props.component.object-name}
 		*/
+
           <img src={this.props.business.imageSrc} alt=''/>
         </div>
         <h2>{this.props.business.name}</h2>
